@@ -1,22 +1,27 @@
 // 6. ZigZag Conversion
 /*
-Brute force solution:
-Creating a 2d array that stores the chars in zigzag order and then read it in string
+Creating a StringBuilder array to hold the characters for each row.
  */
 import java.util.Scanner;
 public class Solution {
     public String convert(String s, int numRows) {
         int len = s.length();
         if (numRows == 1 || len <= numRows) return s;
-        char[][] zigzag = new char[numRows][len];
-        int row = 0, col = 0, dir = 1;  // dir = 1 means down, dir = -1 means up
+        
+        StringBuilder[] sb = new StringBuilder[numRows];
+        // initialization required for each of the StringBuilder objects in array
+        for (int i = 0; i < numRows; i++) {
+            sb[i] = new StringBuilder();
+        }
+
+        int row = 0, dir = 1;  // dir = 1 means down, dir = -1 means up
+
         for (int i = 0; i < len; i++) {
-            zigzag[row][col] = s.charAt(i);
+            sb[row].append(s.charAt(i));
             if (dir == 1) {
                 if (row == numRows - 1) {
                     dir = -1;
                     row--;
-                    col++;
                 } else {
                     row++;
                 }
@@ -26,18 +31,15 @@ public class Solution {
                     row++;
                 } else {
                     row--;
-                    col++;
                 }
             }
         }
-        StringBuilder sb = new StringBuilder();
+
+        String result = "";
         for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < len; j++) {
-                if (zigzag[i][j] == '\0') continue;
-                sb.append(zigzag[i][j]);
-            }
+            result += sb[i].toString();
         }
-        String result = sb.toString();
+
         return result;
     }
     public static void main(String[] args) {
