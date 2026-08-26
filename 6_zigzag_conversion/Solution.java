@@ -21,25 +21,26 @@ public class Solution {
             if (dir == 1) {
                 if (row == numRows - 1) {
                     dir = -1;
-                    row--;
+                    row += dir;     // adding dir automatically adds or subtracts 1, according to the direction
                 } else {
-                    row++;
+                    row += dir;
                 }
             } else {
                 if (row == 0) {
                     dir = 1;
-                    row++;
+                    row += dir;
                 } else {
-                    row--;
+                    row += dir;
                 }
             }
         }
 
-        String result = "";
+        StringBuilder sb2 = new StringBuilder();
         for (int i = 0; i < numRows; i++) {
-            result += sb[i].toString();
+            sb2.append(sb[i]);
         }
-
+        String result = sb2.toString();
+        
         return result;
     }
     public static void main(String[] args) {
