@@ -24,5 +24,6 @@ class Solution {
         System.out.print("Enter an integer: ");
         int x = sc.nextInt();
         System.out.println(sol.isPalindrome(x));
+        sc.close();
     }
 }
